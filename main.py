@@ -5,7 +5,7 @@ from typing import Dict, Any, List
 from selenium import webdriver
 from selenium.webdriver.chrome import service as fs
 import pytz
-import yaml
+import json
 import concurrent.futures
 from urllib.parse import urlparse
 
@@ -17,8 +17,13 @@ TIME_ZONE = os.environ.get("TIME_ZONE", "UTC")
 
 
 def load_config() -> List[Dict]:
-    with open('config.yml', 'r') as f:
-        config = yaml.safe_load(f)
+    config_str = os.environ.get("CONFIG", "[]")
+
+    # JSON 文字列をデコードして辞書オブジェクトに変換する
+    try:
+        config = json.loads(config_str)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON 文字列のデコードに失敗しました。: {e}")
 
     # 設定ファイルの形式が正しいかどうかを確認する
     if not isinstance(config, list):
