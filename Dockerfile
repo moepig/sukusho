@@ -36,7 +36,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install chromedriver-binary==111.0.5563.64
 
 # スクリプトをコピー
-COPY main.py config.yml /app/
+COPY main.py /app/
 
 # タイムゾーンを設定
 ENV TIME_ZONE Asia/Tokyo
