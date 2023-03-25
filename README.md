@@ -1,18 +1,23 @@
 # sukusho
 
-## 設定
-スクリーンショットを取得する Web ページの URL と保存先のパスを設定するための設定ファイルを、YAML 形式で記述します。
+## キャプチャ設定
+スクリーンショットを取得する Web ページの URL と保存先のパスを設定するための設定を、JSON 形式で記述します。
 
-### 設定ファイルの書式
-設定ファイルは、以下のような形式で記述します。
+### 形式
+設定は、以下のような形式で記述します。
 
 ```
-- url: https://example.com
-  path: /path/to/save/directory
-
-- url: https://example.org
-  path: /path/to/another/save/directory
-  interval: 10
+[
+  {
+    "url": "https://example.com",
+    "path": "/path/to/save/directory"
+  },
+  {
+    "url": "https://example.org",
+    "path": "/path/to/another/save/directory",
+    "interval": 10
+  }
+]
 ```
 
 設定ファイルは、リスト形式で記述します。
@@ -35,6 +40,9 @@
 省略した場合は、デフォルトで 3600 秒間隔で取得します。
 
 ### 環境変数
+#### `CONFIG`
+キャプチャ設定を JSON 形式で記述します。
+
 #### `TIME_ZONE`
 Pythonスクリプトが実行されるタイムゾーンを設定するための環境変数です。
 
